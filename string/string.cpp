@@ -4,6 +4,20 @@ bool String::isAlpha(char c) {
     return ((c >= 65 && c <= 90) || (c >= 97 && c <= 122));
 }
 
+bool String::isSpace(char c)
+{
+    return ((c == ' ') || (c == '\n') || (c == '\t') || (c == '\r') || (c == '\v') || c =='\f');
+}
+
+char* String::strncpy(char* const dest, char* const src, int n)
+{
+    for (int i = 0; i < n; i++)
+        *(dest + i) = *(src + i);
+
+    *(dest + n) = 0;
+    return dest;
+}
+
 String::String()
 {
     length = 0;
@@ -39,6 +53,7 @@ String::String(const String& str) {
 
 String::String(char c)
 {
+    length = 0;
     data = new char[1];
     data[length++] = c;
 }
@@ -265,8 +280,9 @@ String String::toUpperCase() const {
 
 String String::substr(int start, int end) const
 {
+    //relative member are not allowed in default parameter 
+    if (end == 0) end = length - 1;
     if (start == end) return operator[](start);
-    if (end == 0) end = length;
     if (end - start < 0) return String();
 
     String str(end - start + 1);
@@ -277,10 +293,16 @@ String String::substr(int start, int end) const
 }
 String String::substring(int start, int end) const
 {
+    if (end == 0) end = length - 1;
     if (start == end) return operator[](start);
 
-    if (end == 0) end = length;
-    return substr(start, end - 2);
+    return substr(start, end - 1);
+}
+String String::slice(int start, int end) const {
+    if (end == 0) end = length - 1;
+    if (start == 0) return String(*this);
+    if (start < 0) return substr(length + start, end);
+    return substr(start, end - 1);
 }
 //I can build this method start from others method but the time complexity will rise
 int String::indexOf(const String &str) const {
@@ -334,4 +356,34 @@ int String::lastIndexOf(char c) const {
         if (operator[](i) == c) return i;
 
     return -1;
+}
+
+String String::repeat(int n) const
+{
+    String rs;
+    while (n >= 1) {
+        rs.concat(*this);
+        n--;
+    }
+    return rs;
+}
+
+String String::trim() const
+{
+    bool isTrue = true;
+    char* start = data;
+    char* end = (data + length - 1);
+
+    while (isSpace(*start) && isSpace(*end) && (end >= start)) {
+        if (isSpace(*start)) start++;
+        if (isSpace(*end)) end--;
+    }
+
+    int len = end - start + 1;
+    char* tmp = new char[len + 1];
+
+    String rs(strncpy(tmp, start, len));
+
+    delete[] tmp;
+    return rs;
 }
