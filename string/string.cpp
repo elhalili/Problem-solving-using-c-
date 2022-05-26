@@ -306,6 +306,9 @@ String String::slice(int start, int end) const {
 }
 //I can build this method start from others method but the time complexity will rise
 int String::indexOf(const String &str) const {
+    if ((str.length == 0) && (length == 0)) return -1;
+    else if (str.length > length) return -1;
+
     bool isTrue;
     for (int i = 0; i < length; i++) {
         if (operator[](i) == str[0]) {
@@ -332,6 +335,9 @@ int String::indexOf(char c) const {
 }
 
 int String::lastIndexOf(const String& str) const{
+    if ((str.length == 0) && (length == 0)) return -1;
+    else if (str.length > length) return -1;
+
     bool isTrue;
     for (int i = length - 1; i >= 0; i--) {
         if (operator[](i) == str[str.length - 1]) {

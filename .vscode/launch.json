@@ -7,13 +7,11 @@
       "request": "launch",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "c:/Users/hp/Documents/github/C++/string",
-      "environment": [],
-      "program": "c:/Users/hp/Documents/github/C++/string/build/Debug/outDebug",
-      "internalConsoleOptions": "openOnSessionStart",
+      "externalConsole": false,
+      "cwd": "c:/Users/hp/Documents/github/C++",
+      "program": "c:/Users/hp/Documents/github/C++/build/Debug/outDebug",
       "MIMode": "gdb",
-      "miDebuggerPath": "C:/Program Files (x86)/mingw-w64/i686-8.1.0-posix-dwarf-rt_v6-rev0/mingw32/bin/gdb.exe",
-      "console": "integratedTerminal",
+      "miDebuggerPath": "gdb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
