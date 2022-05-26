@@ -21,8 +21,7 @@ char* String::strncpy(char* const dest, char* const src, int n)
 String::String()
 {
     length = 0;
-    data = new char[1];
-    data[0] = 0;
+    data = NULL;
 }
 
 String::String(int size) {
